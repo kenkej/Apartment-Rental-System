@@ -1,5 +1,4 @@
 import React from 'react'
-import LoginComponent from './login'
 
 class Header extends React.Component {
     render() {
@@ -22,7 +21,9 @@ class Header extends React.Component {
                                 <a class="nav-link" href="#">Pricing</a>
                             </li>
                         </ul>
-                        <LoginComponent />
+                        <a href="/login" class="navbar-text login">
+                            Login
+                        </a>
                     </div>
                 </nav>
             </div>

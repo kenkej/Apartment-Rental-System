@@ -1,10 +1,9 @@
 import React from 'react'
 
-class LoginForm extends React.Component {
-
+class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { username: '', password: '' };
+        this.state = { username: "", password: "", confirm: "", passwordConfirmed: {} };
     }
 
     handleUsernameChange(event) {
@@ -13,42 +12,31 @@ class LoginForm extends React.Component {
 
     handlePasswordChange(event) {
         this.setState({ password: event.target.value });
+        this.changePasswordInputBorder();
     }
 
-    handleLogin(event) {
+    handleConfirmPasswordChange(event) {
+        this.setState({ confirm: event.target.value });
+        this.changePasswordInputBorder();
+    }
+
+    changePasswordInputBorder() {
+        if (this.state.password !== this.state.confirm) {
+            this.setState({ passwordConfirmed: { borderColor: 'red' } });
+        }
+        else {
+            this.setState({ passwordConfirmed: { borderColor: 'green' } });
+        }
+    }
+
+    handleRegister(event) {
         event.preventDefault();
-        fetch('/login', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: this.state.username
-            })
-        })
-            .then(res => {
-                return res.json();
-            })
-            .then(result => {
-                if (result.failed) {
-                    alert('User not existed! Please register!');
-                }
-                else {
-                    if (this.state.password === result[0].password) {
-                        alert('Login successfully!');
-                    }
-                    else {
-                        alert('Wrong password!')
-                    }
-                }
-            });
 
     }
 
     render() {
         return (
-            <div className="container-fluid loginform">
+            <div className="container registerForm">
                 <div className="row">
                     <div className="col-lg-4"></div>
                     <div className="col-lg-4">
@@ -61,12 +49,16 @@ class LoginForm extends React.Component {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Password</label>
-                                <input type="password" className="form-control" id="password" placeholder="Password"
+                                <input style={this.state.passwordConfirmed} type="password" className="form-control" id="password" placeholder="Password"
                                     onChange={this.handlePasswordChange.bind(this)} />
                             </div>
-                            <button className="btn btn-primary" onClick={this.handleLogin.bind(this)}>Login</button>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputPassword1">Confirm Password</label>
+                                <input style={this.state.passwordConfirmed} type="password" className="form-control" id="password" placeholder="Confirm your password"
+                                    onChange={this.handleConfirmPasswordChange.bind(this)} />
+                            </div>
+                            <button className="btn btn-primary" onClick={this.handleRegister.bind(this)}>Register</button>
                         </form>
-                        <a href="/register">Register?</a>
                     </div>
                     <div className="col-lg-4"></div>
                 </div>
@@ -75,4 +67,4 @@ class LoginForm extends React.Component {
     }
 }
 
-export default LoginForm
+export default RegisterForm

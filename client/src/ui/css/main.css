@@ -22,10 +22,11 @@
     padding-bottom: 50px;
 }
 
-.loginform {
+.loginform, .registerForm {
     height: 800px;
     padding-top: 100px;
 }
+
 
 .searchForm {
     height: 1500px;

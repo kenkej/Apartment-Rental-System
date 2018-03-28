@@ -41,7 +41,7 @@ class Search extends React.Component {
                         houses.filter(function (house) {
                             return (
                                 //filter out names that are not matching with the search_value
-                                !house.name.toLowerCase().indexOf(search_value)
+                                house.name.toLowerCase().include(search_value)
                             )
                         }).map(h =>
                             <HouseInfo key={h._id}
