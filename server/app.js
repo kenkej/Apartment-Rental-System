@@ -7,6 +7,11 @@ var app = express();
 var mongoose = require('mongoose');
 
 //Model Implementation
+var User = require('./APIs/models/UserModel');
+var House = require('./APIs/models/HouseModel');
+
+//Database connection
+mongoose.connect("mongodb://localhost:27017/house-rent");
 
 //Applying middlewares 
 app.use(logger('dev'));
@@ -16,7 +21,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //API routes implementation
-
+var UserRoute = require('./APIs/routes/UserRoute');
+UserRoute(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
