@@ -10,13 +10,13 @@ class RegisterForm extends React.Component {
         this.setState({ username: event.target.value });
     }
 
-    handlePasswordChange(event) {
-        this.setState({ password: event.target.value });
+    async handlePasswordChange(event) {
+        await this.setState({ password: event.target.value });
         this.changePasswordInputBorder();
     }
 
-    handleConfirmPasswordChange(event) {
-        this.setState({ confirm: event.target.value });
+    async handleConfirmPasswordChange(event) {
+        await this.setState({ confirm: event.target.value });
         this.changePasswordInputBorder();
     }
 
@@ -30,6 +30,10 @@ class RegisterForm extends React.Component {
     }
 
     handleRegister(event) {
+        if (this.state.password !== this.state.confirm) {
+            alert('Password must be confirmed!');
+            return;
+        }
         event.preventDefault();
 
     }
@@ -43,18 +47,18 @@ class RegisterForm extends React.Component {
                         <form>
                             <div className="form-group">
                                 <label htmlFor="exampleInputEmail1">Username</label>
-                                <input type="text" className="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username"
+                                <input required type="text" className="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username"
                                     onChange={this.handleUsernameChange.bind(this)} />
                                 <small id="emailHelp" className="form-text text-muted">We'll never share your username with anyone else.</small>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Password</label>
-                                <input style={this.state.passwordConfirmed} type="password" className="form-control" id="password" placeholder="Password"
+                                <input required style={this.state.passwordConfirmed} type="password" className="form-control" id="password" placeholder="Password"
                                     onChange={this.handlePasswordChange.bind(this)} />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Confirm Password</label>
-                                <input style={this.state.passwordConfirmed} type="password" className="form-control" id="password" placeholder="Confirm your password"
+                                <input required style={this.state.passwordConfirmed} type="password" className="form-control" id="password" placeholder="Confirm your password"
                                     onChange={this.handleConfirmPasswordChange.bind(this)} />
                             </div>
                             <button className="btn btn-primary" onClick={this.handleRegister.bind(this)}>Register</button>
