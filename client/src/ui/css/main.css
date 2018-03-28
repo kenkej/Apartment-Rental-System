@@ -1,0 +1,29 @@
+.body {
+    background-image: url("http://www.clicktools.com/wp-content/uploads/2016/08/CT-WEB-Header-Salesforce-bg.jpg");
+    height: auto;
+    padding-top: 100px;
+}
+
+.header {
+    background-color: chartreuse;
+}
+
+.login {
+    cursor: pointer;
+    border:none;
+    background-color: white;
+}
+
+.house {
+    float: left;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-bottom: 50px;
+}
+
+.footer {
+    background-image: url("https://image.freepik.com/free-photo/galaxy-scene_1048-5105.jpg");   
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
