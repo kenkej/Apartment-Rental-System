@@ -34,7 +34,7 @@ class Search extends React.Component {
                 <input class="form-control mr-sm-2"
                     name="search"
                     type="text"
-                    placeholder="Search home"
+                    placeholder="Search house..."
                     onChange={this.searchHandler.bind(this)} />
                 <div class="row">
                     {
