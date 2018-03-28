@@ -4,14 +4,9 @@
     padding-top: 100px;
 }
 
-.header {
-    background-color: chartreuse;
-}
-
 .login {
     cursor: pointer;
     border:none;
-    background-color: white;
 }
 
 .house {
@@ -21,9 +16,18 @@
     margin-bottom: 50px;
 }
 
-.footer {
-    background-image: url("https://image.freepik.com/free-photo/galaxy-scene_1048-5105.jpg");   
+.footer { 
     text-align: center;
     padding-top: 50px;
     padding-bottom: 50px;
+}
+
+.loginform {
+    height: 800px;
+    padding-top: 100px;
+}
+
+.searchForm {
+    height: 1500px;
+    padding-top: 100px;
 }

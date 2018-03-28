@@ -48,21 +48,27 @@ class LoginForm extends React.Component {
 
     render() {
         return (
-            <div>
-                <form>
-                    <div className="form-group">
-                        <label htmlFor="exampleInputEmail1">Username</label>
-                        <input type="text" className="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username"
-                            onChange={this.handleUsernameChange.bind(this)} />
-                        <small id="emailHelp" className="form-text text-muted">We'll never share your username with anyone else.</small>
+            <div className="container-fluid loginform">
+                <div className="row">
+                    <div className="col-lg-4"></div>
+                    <div className="col-lg-4">
+                        <form>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputEmail1">Username</label>
+                                <input type="text" className="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username"
+                                    onChange={this.handleUsernameChange.bind(this)} />
+                                <small id="emailHelp" className="form-text text-muted">We'll never share your username with anyone else.</small>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputPassword1">Password</label>
+                                <input type="password" className="form-control" id="password" placeholder="Password"
+                                    onChange={this.handlePasswordChange.bind(this)} />
+                            </div>
+                            <button className="btn btn-primary" onClick={this.handleLogin.bind(this)}>Login</button>
+                        </form>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleInputPassword1">Password</label>
-                        <input type="password" className="form-control" id="password" placeholder="Password"
-                            onChange={this.handlePasswordChange.bind(this)} />
-                    </div>
-                    <button className="btn btn-primary" onClick={this.handleLogin.bind(this)}>Login</button>
-                </form>
+                    <div className="col-lg-4"></div>
+                </div>
             </div>
         );
     }

@@ -4,7 +4,7 @@ class Footer extends React.Component {
     render(){
         return(
             <div className="footer">
-                Designed by Thông-san
+                Designed by Bờ-đê Team
             </div>
         );
     }

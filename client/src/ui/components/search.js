@@ -30,7 +30,7 @@ class Search extends React.Component {
     render() {
         const { search_value, houses } = this.state;
         return (
-            <div>
+            <div className="container searchForm">
                 <input class="form-control mr-sm-2"
                     name="search"
                     type="text"
