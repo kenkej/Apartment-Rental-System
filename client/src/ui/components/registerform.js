@@ -3,11 +3,28 @@ import React from 'react'
 class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { username: "", password: "", confirm: "", passwordConfirmed: {} };
+        this.state = { username: "", password: "", confirm: "", passwordConfirmed: {}, userExisted: {display : 'none'} };
     }
 
-    handleUsernameChange(event) {
-        this.setState({ username: event.target.value });
+    async handleUsernameChange(event) {
+        await this.setState({ username: event.target.value });
+        this.checkExistedUser();
+    }
+
+    checkExistedUser() {
+        fetch('/register/' + this.state.username)
+            .then(res => {
+                console.log(res);
+                return res.json();
+            })
+            .then(result => {
+                if (result.existed) {
+                    this.setState({ userExisted: { display: 'block', color: 'red' } })
+                }
+                else {
+                    this.setState({ userExisted: { display: 'none' } })
+                }
+            })
     }
 
     async handlePasswordChange(event) {
@@ -30,12 +47,38 @@ class RegisterForm extends React.Component {
     }
 
     handleRegister(event) {
+        if (this.state.username.length === 0 || this.state.password.length === 0 || this.state.confirm.length === 0) {
+            alert('All fields must not be empty!');
+            return;
+        }
         if (this.state.password !== this.state.confirm) {
             alert('Password must be confirmed!');
             return;
         }
+        fetch('/register',
+            {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: this.state.username,
+                    password: this.state.password
+                })
+            })
+            .then(res => {
+                return res.json();
+            })
+            .then(result => {
+                if (result.success){
+                    alert('Register successfully!');
+                }
+                else {
+                    alert('Register failed!')
+                }
+            })
         event.preventDefault();
-
     }
 
     render() {
@@ -49,7 +92,7 @@ class RegisterForm extends React.Component {
                                 <label htmlFor="exampleInputEmail1">Username</label>
                                 <input required type="text" className="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username"
                                     onChange={this.handleUsernameChange.bind(this)} />
-                                <small id="emailHelp" className="form-text text-muted">We'll never share your username with anyone else.</small>
+                                <small id="emailHelp" style={this.state.userExisted}>This user existed already</small>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Password</label>
