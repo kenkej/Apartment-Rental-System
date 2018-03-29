@@ -11,7 +11,7 @@ var User = require('./APIs/models/UserModel');
 var House = require('./APIs/models/HouseModel');
 
 //Database connection
-mongoose.connect("mongodb://localhost:27017/house-rent");
+mongoose.connect("mongodb://trung93:sayuwill@ds127129.mlab.com:27129/house-rent");
 
 //Applying middlewares 
 app.use(logger('dev'));
