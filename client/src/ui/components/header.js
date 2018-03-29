@@ -4,24 +4,24 @@ class Header extends React.Component {
     render() {
         return (
             <div className="container-fluid header">
-                <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-                    <a class="navbar-brand" >{this.props.headerName}</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                <nav className="navbar navbar-expand-lg navbar-light bg-primary">
+                    <a className="navbar-brand" >{this.props.headerName}</a>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarText">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    <div className="collapse navbar-collapse" id="navbarText">
+                        <ul className="navbar-nav mr-auto">
+                            <li className="nav-item active">
+                                <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Features</a>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Features</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Pricing</a>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Pricing</a>
                             </li>
                         </ul>
-                        <a href="/login" class="navbar-text login">
+                        <a href="/login" className="navbar-text login">
                             Login
                         </a>
                     </div>

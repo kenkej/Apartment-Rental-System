@@ -31,12 +31,12 @@ class Search extends React.Component {
         const { search_value, houses } = this.state;
         return (
             <div className="container searchForm">
-                <input class="form-control mr-sm-2"
+                <input className="form-control mr-sm-2"
                     name="search"
                     type="text"
                     placeholder="Search house..."
                     onChange={this.searchHandler.bind(this)} />
-                <div class="row">
+                <div className="row">
                     {
                         houses.filter(function (house) {
                             return (
@@ -48,7 +48,9 @@ class Search extends React.Component {
                                 img_src={h.image}
                                 house_name={h.name}
                                 house_address={h.description}
-                                house_price={h.price} />
+                                house_price={h.price} 
+                                house_deposit={h.deposit}
+                                house_available={h.available}/>
                         )
                     }
                 </div>
