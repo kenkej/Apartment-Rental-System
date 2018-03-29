@@ -32,3 +32,15 @@
     height: 1500px;
     padding-top: 100px;
 }
+
+.buttonRent {
+    border: none;
+    color: white;
+    cursor: pointer;
+    height: 50px;
+    display: none;
+}
+
+.card:hover .buttonRent {
+    display: block;
+}
