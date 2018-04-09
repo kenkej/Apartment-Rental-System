@@ -1,0 +1,51 @@
+.body {
+    background-image: url("http://www.clicktools.com/wp-content/uploads/2016/08/CT-WEB-Header-Salesforce-bg.jpg");
+    height: 2000px;
+    padding-top: 100px;
+}
+
+.login {
+    cursor: pointer;
+    border:none;
+}
+
+.house {
+    float: left;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-bottom: 50px;
+}
+
+.footer { 
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.loginform, .registerForm {
+    height: 800px;
+    padding-top: 100px;
+}
+
+
+.searchForm {
+    height: 1500px;
+    padding-top: 100px;
+}
+
+.buttonRent {
+    border: none;
+    color: white;
+    cursor: pointer;
+    height: 50px;
+    display: none;
+}
+
+.card:hover .buttonRent {
+    display: block;
+}
+
+.newhouse {
+    padding-top: 30px;
+    height: 1000px;
+}
