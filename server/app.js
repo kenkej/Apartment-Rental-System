@@ -7,7 +7,6 @@ var app = express();
 var mongoose = require('mongoose');
 
 //Model Implementation
-var User = require('./APIs/models/UserModel');
 var House = require('./APIs/models/HouseModel');
 
 //Database connection
@@ -21,8 +20,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //API routes implementation
-var UserRoute = require('./APIs/routes/UserRoute');
-UserRoute(app);
 var HouseRoute = require('./APIs/routes/HouseRoute');
 HouseRoute(app);
 
