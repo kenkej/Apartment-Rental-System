@@ -1,8 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import Search from './search'
-import LoginComponent from './loginform'
-import RegisterComponent from './registerform'
+import NewHouseComponent from './addnewhouse'
 
 
 class Main extends React.Component {
@@ -10,8 +9,7 @@ class Main extends React.Component {
         return (
             <div>
                 <Route exact path="/" component={Search} />
-                <Route exact path="/login" component={LoginComponent} />
-                <Route exact path="/register" component={RegisterComponent} />
+                <Route exact path="/postahouse" component={NewHouseComponent} />                
             </div>
         )
     }

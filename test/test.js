@@ -1,15 +1,15 @@
+var app = require('express')();
 var multer = require('multer');
-const path = require('path');
-
+var bodyparser = require('body-parser');
 const multerConfig = {
     storage: multer.diskStorage({
         //Setup where the user's file will go
         destination: function (req, file, next) {
-            next(null, path.dirname(path.dirname(__dirname)) + '/houseimages');
+            next(null, __dirname + '/uploads');
         },
 
         //Then give the file a unique name
-        filename: function (req, file, next) {
+        filename: function (req, file, next) {            
             const ext = file.mimetype.split('/')[1];
             next(null, file.fieldname + '-' + Date.now() + '.' + ext);
         }
@@ -30,12 +30,13 @@ const multerConfig = {
         }
     }
 };
-var HouseController = require('../controllers/HouseController');
 
-module.exports = function (app) {
-    app.route('/getallhouse')
-        .get(HouseController.getallhouse);
-    
-    app.route('/postnewhouse')
-        .post(multer(multerConfig).single('house'), HouseController.postAHouse)
-}
+app.use(bodyparser.urlencoded({ extended: false }))
+app.use(bodyparser.json());
+
+app.get('/', (req, res) => { res.sendFile(__dirname + '/index.html') })
+app.post('/upload', multer(multerConfig).single('image') ,(req, res) => {
+    console.log(req.file);
+})
+
+app.listen(4000, console.log('Server at 4000'))
