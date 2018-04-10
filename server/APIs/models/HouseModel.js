@@ -17,7 +17,8 @@ var HouseSchema = mongoose.Schema({
     postFeePaid: {
         type: Boolean,
         default: false
-    }
+    },
+    contractAddress: String
 }, {
         collection: 'houses',
         max: 1000

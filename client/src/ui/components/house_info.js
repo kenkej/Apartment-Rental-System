@@ -1,6 +1,11 @@
 import React from 'react'
 
+
 class HouseInfo extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
 
     handleRentEvent(event) {
 

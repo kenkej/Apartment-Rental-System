@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import RentalArtifact from '../../smartcontract/build/contracts/RentalContract.json'
+
 
 class NewHouseComponent extends Component {
     constructor(props) {
@@ -9,11 +11,38 @@ class NewHouseComponent extends Component {
             description: '',
             price: 0,
             deposit: 0,
+            contractAddress: ''
         }
+    }
+
+    initializeContract() {
+        return new Promise((resolve, reject) => {            
+            const RentalContract = this.props.web3.eth.contract(RentalArtifact.abi)
+            var houseOwner = this.props.web3.eth.accounts[0]            
+            RentalContract.new({ data: RentalArtifact.bytecode, from: houseOwner }, (error, contract) => {
+                if (error) {
+                    reject(error);
+                }
+                else {
+                    resolve(contract.address);
+                }
+            })
+        })
     }
 
     submitForm(evt) {
         evt.preventDefault();
+        this.initializeContract()
+            .then(contractAddress => {
+                this.setState({ contractAddress });
+                this.saveRentContract();
+            })
+            .catch(error => {
+                alert(error)
+            });
+    }
+
+    saveRentContract(evt) {
         var data = new FormData(evt.target);
         fetch('/postnewhouse', {
             method: 'POST',
@@ -25,29 +54,29 @@ class NewHouseComponent extends Component {
                     alert('Your house was saved! Wait for it to be on page!')
                 }
                 else {
-                    alert('fail vkl!')
+                    alert('fail 2!')
                 }
             })
     }
 
-    handleChangeName(evt){
-        this.setState({name : evt.target.value});
+    handleChangeName(evt) {
+        this.setState({ name: evt.target.value });
     }
 
-    handleChangeAddress(evt){
-        this.setState({address : evt.target.value});
+    handleChangeAddress(evt) {
+        this.setState({ address: evt.target.value });
     }
 
-    handleChangeDescription(evt){
-        this.setState({description : evt.target.value});
+    handleChangeDescription(evt) {
+        this.setState({ description: evt.target.value });
     }
 
-    handleChangePrice(evt){
-        this.setState({price : evt.target.value});
+    handleChangePrice(evt) {
+        this.setState({ price: evt.target.value });
     }
 
-    handleChangeDeposit(evt){
-        this.setState({deposit : evt.target.value});
+    handleChangeDeposit(evt) {
+        this.setState({ deposit: evt.target.value });
     }
 
     render() {
@@ -55,18 +84,19 @@ class NewHouseComponent extends Component {
             <div>
                 <div className="container newhouse">
                     <h2>Post your new house</h2>
-                    <form id="houseform"  onSubmit={this.submitForm.bind(this)} encType="multipart/formdata">
+                    <form id="houseform" onSubmit={this.submitForm.bind(this)} encType="multipart/formdata">
+                        <input name="contractAddress" type="hidden" value={this.state.contractAddress} />
                         <div className="form-group">
                             <label>House Name: </label>
-                            <input  name="name" type="text" required onChange={this.handleChangeName.bind(this)} className="form-control" id="name" placeholder="Enter house name" />
+                            <input name="name" type="text" required onChange={this.handleChangeName.bind(this)} className="form-control" id="name" placeholder="Enter house name" />
                         </div>
                         <div className="form-group">
                             <label>House Address: </label>
-                            <input  name="address" type="text" required onChange={this.handleChangeAddress.bind(this)} className="form-control" id="name" placeholder="Enter house name" />
+                            <input name="address" type="text" required onChange={this.handleChangeAddress.bind(this)} className="form-control" id="name" placeholder="Enter house name" />
                         </div>
                         <div className="form-group">
                             <label>House Description: </label>
-                            <input  name="description" type="text" required onChange={this.handleChangeDescription.bind(this)} className="form-control" id="description" placeholder="Enter house description" />
+                            <input name="description" type="text" required onChange={this.handleChangeDescription.bind(this)} className="form-control" id="description" placeholder="Enter house description" />
                         </div>
                         <div className="form-group">
                             <label >House price per day: </label>
@@ -74,11 +104,11 @@ class NewHouseComponent extends Component {
                         </div>
                         <div className="form-group">
                             <label>House price deposit: </label>
-                            <input  name="deposit"type="number" required onChange={this.handleChangeDeposit.bind(this)} className="form-control" id="price_deposit" placeholder="Enter house price deposit" />
+                            <input name="deposit" type="number" required onChange={this.handleChangeDeposit.bind(this)} className="form-control" id="price_deposit" placeholder="Enter house price deposit" />
                         </div>
                         <div className="form-group">
                             <label>House image: </label>
-                            <input  name="house" type="file" required className="form-control" id="img_link" />
+                            <input name="house" type="file" required className="form-control" id="img_link" />
                         </div>
                         <button className="btn btn-primary">Post</button>
                     </form>

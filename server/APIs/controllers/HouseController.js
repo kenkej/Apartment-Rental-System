@@ -27,7 +27,8 @@ exports.postAHouse = function (req, res) {
                 description: req.body.description,
                 price: req.body.price,
                 deposit: req.body.deposit,
-                image: imageLink.url
+                image: imageLink.url,
+                contractAddress: req.body.contractAddress
             });
             newHouse.save(function (err, house) {
                 if (!err) {
