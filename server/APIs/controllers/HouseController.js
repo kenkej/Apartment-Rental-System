@@ -11,7 +11,7 @@ cloudinary.config({
 
 
 exports.getallhouse = function (req, res) {
-    House.find({ postFeePaid: true }, function (err, houses) {
+    House.find(function (err, houses) {
         res.json(houses);
     })
 }

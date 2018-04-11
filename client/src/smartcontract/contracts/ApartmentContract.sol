@@ -1,61 +1,55 @@
 pragma solidity ^0.4.17;
 pragma experimental ABIEncoderV2;
 
-contract RentalContract {
+contract ApartmentContract {
 
-   struct house{
-      address owner;
-      string houseID;
-   }
-
-   house[] houses;
-   address[] public customer;
-   uint32 public price;
+   address public customer;
+   address public owner;
+   uint256 public price;
    uint256 public rentedTime;
    uint256 public rentDays;
-   uint256 public lateCharge;
-   bool public houseStatus;
+   uint256 private customerValue;
+   
+   event RentalStatus(string _msg);
 
-   mapping(address => string)apartmentContracts;
+   function ApartmentContract(uint32 _price) public{
+      price = _price;
+      owner = msg.sender;
+   }
+   
+   function setCustomerValue(uint256 _value) private{
+       customerValue = _value;
+   }
 
-   event RentalStatus(string _msg, address user, uint amount, uint256 time);
-
+    function getCustomerValue() public returns(uint256) {
+        return customerValue;
+    }
+    
    modifier onlyCustomer() {
-      if(isCustomer(msg.sender)) {
+      if(msg.sender == customer) {
          _;
       } else revert();
    }
 
-   function newHouse(string _houseID) public {
-      houses.push(house(msg.sender, _houseID));
-   }
-
-   function getAllApartments() public view returns(house[]) {
-      return houses;
-   }
-
-   function isCustomer(address _Customer) private returns(bool) {
-      for (uint i=0; i<customer.length; i++) {
-         if(customer[i] == msg.sender) {
-           return true; 
-         } 
-      }
-      return false;
-   }
-
-   function bookHouse(uint256 _days) public payable{
-      if((msg.value == (price * _days)) && isCustomer(msg.sender)) {
-         rentedTime = block.timestamp;
-         rentDays = _days;
-         emit RentalStatus("Rented", msg.sender, msg.value, rentedTime);
-      } else {
+    function bookHouse(uint256 _days) public payable{
+       setCustomerValue(msg.value);
+        if ((msg.value - tx.gasprice)  > (_days * price) + (price/2)){
+         rentDays = _days * 1 days;
+         rentedTime = now;
+         customer = msg.sender;
+         emit RentalStatus("Rented");
+        }
+        else {
          revert();
       } 
    }
 
    function returnHouse() public onlyCustomer {
-      if(block.timestamp > (rentedTime + rentDays)) {
-         emit RentalStatus("Return late", msg.sender, lateCharge, block.timestamp);
+      if(now > rentedTime + rentDays) {
+          uint256 latetime = (now - (rentedTime + rentDays)) / 1 days;
+          emit RentalStatus("Return late");
+      } else {
+         emit RentalStatus("Return on time");
       }
    }
 }

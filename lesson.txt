@@ -1,0 +1,2 @@
+abi : make contract object , put in the web3.eth.contract constructor
+bytecode: need to be in data to deploy contract to Ethereum network.

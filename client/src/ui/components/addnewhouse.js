@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import RentalArtifact from '../../smartcontract/build/contracts/RentalContract.json'
-
 
 class NewHouseComponent extends Component {
     constructor(props) {
@@ -16,17 +14,18 @@ class NewHouseComponent extends Component {
 
     submitForm(evt) {
         evt.preventDefault();
+        const RentalArtifact = this.props.artifact;
         var data = new FormData(evt.target);
         const RentalContract = this.props.web3.eth.contract(RentalArtifact.abi)
         var houseOwner = this.props.web3.eth.accounts[0]
-        RentalContract.new({ data: RentalArtifact.bytecode, from: houseOwner }, (error, contract) => {
+        RentalContract.new(this.state.price, { data: RentalArtifact.bytecode, from: houseOwner }, (error, contract) => {
             if (error) {
                 alert('Contract making failed!');
                 return;
             }
             else {
                 if (contract.address) {
-                    console.log('Fire lan thu 2')
+                    console.log('Fire lan thu 2');                    
                     data.append('contractAddress', contract.address)
                     fetch('/postnewhouse', {
                         method: 'POST',
@@ -35,7 +34,8 @@ class NewHouseComponent extends Component {
                         .then((response) => { return response.json() })
                         .then((result) => {
                             if (result.status) {
-                                alert('Your house was saved! Wait for it to be on page!')    
+                                alert('Your house contract was created! Wait for it to be on page!');
+                                window.location.href = '/';                                   
                             }
                             else {
                                 alert('Database error!')

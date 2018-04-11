@@ -6,14 +6,6 @@ var HouseSchema = mongoose.Schema({
     image: String,
     price: Number,
     deposit: Number,
-    available: {
-        type: Boolean,
-        default: true
-    },
-    postFeePaid: {
-        type: Boolean,
-        default: true
-    },
     contractAddress: String
 }, {
         collection: 'houses',

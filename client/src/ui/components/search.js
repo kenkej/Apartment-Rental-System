@@ -51,7 +51,9 @@ class Search extends React.Component {
 								house_price={h.price}
 								house_deposit={h.deposit}
 								house_available={h.available}
-								web3={this.state.web3}
+								web3={this.props.web3} 
+								artifact={this.props.artifact} 
+								contractAddress={h.contractAddress}
 								/>
 						)
 					}
