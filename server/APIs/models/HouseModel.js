@@ -1,9 +1,5 @@
 var mongoose = require('mongoose');
 var HouseSchema = mongoose.Schema({
-    owner: {
-        type:String,
-        default: 'Owner'
-    },// this is the house owner's wallet address
     name: String,
     address: String,
     description: String,
@@ -16,7 +12,7 @@ var HouseSchema = mongoose.Schema({
     },
     postFeePaid: {
         type: Boolean,
-        default: false
+        default: true
     },
     contractAddress: String
 }, {

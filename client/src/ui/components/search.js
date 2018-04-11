@@ -12,8 +12,6 @@ class Search extends React.Component {
 		}
 	}
 
-	
-
 	componentDidMount() {
 		fetch('/getallhouse')
 			.then(res => {

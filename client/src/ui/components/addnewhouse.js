@@ -11,52 +11,43 @@ class NewHouseComponent extends Component {
             description: '',
             price: 0,
             deposit: 0,
-            contractAddress: ''
         }
-    }
-
-    initializeContract() {
-        return new Promise((resolve, reject) => {            
-            const RentalContract = this.props.web3.eth.contract(RentalArtifact.abi)
-            var houseOwner = this.props.web3.eth.accounts[0]            
-            RentalContract.new({ data: RentalArtifact.bytecode, from: houseOwner }, (error, contract) => {
-                if (error) {
-                    reject(error);
-                }
-                else {
-                    resolve(contract.address);
-                }
-            })
-        })
     }
 
     submitForm(evt) {
         evt.preventDefault();
-        this.initializeContract()
-            .then(contractAddress => {
-                this.setState({ contractAddress });
-                this.saveRentContract();
-            })
-            .catch(error => {
-                alert(error)
-            });
-    }
-
-    saveRentContract(evt) {
         var data = new FormData(evt.target);
-        fetch('/postnewhouse', {
-            method: 'POST',
-            body: data
-        })
-            .then((response) => { return response.json() })
-            .then((result) => {
-                if (result.status) {
-                    alert('Your house was saved! Wait for it to be on page!')
+        const RentalContract = this.props.web3.eth.contract(RentalArtifact.abi)
+        var houseOwner = this.props.web3.eth.accounts[0]
+        RentalContract.new({ data: RentalArtifact.bytecode, from: houseOwner }, (error, contract) => {
+            if (error) {
+                alert('Contract making failed!');
+                return;
+            }
+            else {
+                if (contract.address) {
+                    console.log('Fire lan thu 2')
+                    data.append('contractAddress', contract.address)
+                    fetch('/postnewhouse', {
+                        method: 'POST',
+                        body: data
+                    })
+                        .then((response) => { return response.json() })
+                        .then((result) => {
+                            if (result.status) {
+                                alert('Your house was saved! Wait for it to be on page!')    
+                            }
+                            else {
+                                alert('Database error!')
+                            }
+
+                        })
                 }
                 else {
-                    alert('fail 2!')
+                    console.log('Fire lan thu 1 (for checking tx hash)')
                 }
-            })
+            }
+        })
     }
 
     handleChangeName(evt) {
@@ -85,7 +76,6 @@ class NewHouseComponent extends Component {
                 <div className="container newhouse">
                     <h2>Post your new house</h2>
                     <form id="houseform" onSubmit={this.submitForm.bind(this)} encType="multipart/formdata">
-                        <input name="contractAddress" type="hidden" value={this.state.contractAddress} />
                         <div className="form-group">
                             <label>House Name: </label>
                             <input name="name" type="text" required onChange={this.handleChangeName.bind(this)} className="form-control" id="name" placeholder="Enter house name" />
