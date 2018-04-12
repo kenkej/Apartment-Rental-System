@@ -33,7 +33,7 @@ contract ApartmentContract {
 
     function bookHouse(uint256 _days) public payable{
        setCustomerValue(msg.value);
-        if ((msg.value - tx.gasprice)  > (_days * price) + (price/2)){
+        if ((msg.value - tx.gasprice)  == (_days * price) + (price/2)){
          rentDays = _days * 1 days;
          rentedTime = now;
          customer = msg.sender;
