@@ -7,8 +7,7 @@ class NewHouseComponent extends Component {
             name: '',
             address: '',
             description: '',
-            price: 0,
-            deposit: 0,
+            price: 0
         }
     }
 
@@ -91,11 +90,7 @@ class NewHouseComponent extends Component {
                         <div className="form-group">
                             <label >House price per day: </label>
                             <input name="price" type="number" required onChange={this.handleChangePrice.bind(this)} className="form-control" id="price_per_day" placeholder="Enter house price per day" />
-                        </div>
-                        <div className="form-group">
-                            <label>House price deposit: </label>
-                            <input name="deposit" type="number" required onChange={this.handleChangeDeposit.bind(this)} className="form-control" id="price_deposit" placeholder="Enter house price deposit" />
-                        </div>
+                        </div>                       
                         <div className="form-group">
                             <label>House image: </label>
                             <input name="house" type="file" required className="form-control" id="img_link" />

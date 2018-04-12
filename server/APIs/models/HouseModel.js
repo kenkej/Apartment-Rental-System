@@ -5,7 +5,6 @@ var HouseSchema = mongoose.Schema({
     description: String,
     image: String,
     price: Number,
-    deposit: Number,
     available: {
         type: Boolean,
         default: true

@@ -17,6 +17,9 @@ class Header extends React.Component {
                             <li className="nav-item">
                                 <a className="nav-link" href="/postahouse">Post your house</a>
                             </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="/withdraw">Return house</a>
+                            </li>
                         </ul>
                     </div>
                 </nav>

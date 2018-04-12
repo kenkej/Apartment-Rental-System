@@ -16,9 +16,9 @@ exports.getallhouse = function (req, res) {
     })
 }
 
-exports.updateStatus = function (req, res) {
-    var houseID = req.params.id;
-    House.findByIdAndUpdate(houseID, { available: req.body.apartmentStatus.includes('Rented') ? false : true},
+exports.updateStatus = function (req, res) {            
+    House.findOneAndUpdate({contractAddress : req.body.contractAddress}, 
+        { available: req.body.apartmentStatus.includes('Rented') ? false : true},
         function (err, result) {
             if (!err) {
                 res.json({ status: true });
@@ -43,6 +43,7 @@ exports.postAHouse = function (req, res) {
                 image: imageLink.url,
                 contractAddress: req.body.contractAddress
             });
+            debugger
             newHouse.save(function (err, house) {
                 if (!err) {
                     res.json({ status: true })

@@ -2,6 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import Search from './search'
 import NewHouseComponent from './addnewhouse'
+import WithdrawComponent from './WithdrawComponent'
 import getWeb3 from '../../utils/getWeb3'
 import ApartmentArtifact from '../../smartcontract/build/contracts/ApartmentContract.json'
 
@@ -31,7 +32,11 @@ class Main extends React.Component {
                 <Route exact path="/postahouse"
                     render={() => <NewHouseComponent web3={this.state.web3} artifact={this.state.ApartmentArtifact}/>}
                 />
+                 <Route exact path="/withdraw"
+                    render={() => <WithdrawComponent web3={this.state.web3} artifact={this.state.ApartmentArtifact}/>}
+                />
             </div>
+        
         )
     }
 }

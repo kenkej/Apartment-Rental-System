@@ -19,6 +19,9 @@ class Search extends React.Component {
 			})
 			.then(houses => {
 				this.setState({ houses })
+			})
+			.catch(err => {
+				alert('Server is not running!')
 			});
 	}
 
@@ -44,12 +47,12 @@ class Search extends React.Component {
 								house.name.toLowerCase().includes(search_value)
 							)
 						}).map(h =>
-							<HouseInfo key={h._id}
+							<HouseInfo key={h._id} 
+								house_id={h._id}
 								img_src={h.image}
 								house_name={h.name}
 								house_address={h.description}
-								house_price={h.price}
-								house_deposit={h.deposit}
+								house_price={h.price}								
 								house_available={h.available}
 								web3={this.props.web3} 
 								artifact={this.props.artifact} 
