@@ -38,4 +38,7 @@ module.exports = function (app) {
     
     app.route('/postnewhouse')
         .post(multer(multerConfig).single('house'), HouseController.postAHouse)
+
+    app.route('/updateStatus/:id')
+        .post(HouseController.updateStatus)
 }

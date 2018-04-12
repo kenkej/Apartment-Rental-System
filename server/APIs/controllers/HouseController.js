@@ -16,6 +16,19 @@ exports.getallhouse = function (req, res) {
     })
 }
 
+exports.updateStatus = function (req, res) {
+    var houseID = req.params.id;
+    House.findByIdAndUpdate(houseID, { available: req.body.apartmentStatus.includes('Rented') ? false : true},
+        function (err, result) {
+            if (!err) {
+                res.json({ status: true });
+            }
+            else {
+                res.json({ status: false })
+            }
+        });
+}
+
 exports.postAHouse = function (req, res) {
     var fileLink = path.dirname(path.dirname(__dirname)) + '/houseimages/' + req.file.filename
     cloudinary.uploader.upload(fileLink)
