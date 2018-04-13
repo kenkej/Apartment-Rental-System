@@ -6,7 +6,7 @@ class HouseInfo extends React.Component {
         super(props);
         this.state = {
             rentDays: 1,
-            totalFee: this.props.house_price + this.props.house_price / 2
+            totalFee: this.props.house_price
         }
     }
 
@@ -59,7 +59,7 @@ class HouseInfo extends React.Component {
     handleChangeRentDays(event) {
         this.setState({
             rentDays: event.target.value,
-            totalFee: event.target.value * this.props.house_price + this.props.house_price / 2
+            totalFee: event.target.value * this.props.house_price
         });
     }
 
@@ -67,7 +67,7 @@ class HouseInfo extends React.Component {
         return (
             <div className="house">
                 <div className="card" style={{ width: 18 + 'rem' }}>
-                    <img className="card-img-top" src={this.props.img_src} />
+                    <img className="card-img-top" alt="" src={this.props.img_src} />
                     <div className="card-body">
                         <h5 className="card-title">House Contract Address: </h5>
                         <h5 className="card-title">{this.props.contractAddress}</h5>

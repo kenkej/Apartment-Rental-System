@@ -42,8 +42,7 @@ exports.postAHouse = function (req, res) {
                 deposit: req.body.deposit,
                 image: imageLink.url,
                 contractAddress: req.body.contractAddress
-            });
-            debugger
+            });            
             newHouse.save(function (err, house) {
                 if (!err) {
                     res.json({ status: true })
